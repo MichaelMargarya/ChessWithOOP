@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Img\BishopB.png" />
+    <None Remove="Img\BishopW.png" />
+    <None Remove="Img\KingB.png" />
+    <None Remove="Img\KingW.png" />
+    <None Remove="Img\KnightB.png" />
+    <None Remove="Img\KnightW.png" />
+    <None Remove="Img\PawnB.png" />
+    <None Remove="Img\PawnW.png" />
+    <None Remove="Img\phprnyp9x.png" />
+    <None Remove="Img\QueenB.png" />
+    <None Remove="Img\QueenW.png" />
+    <None Remove="Img\RookB.png" />
+    <None Remove="Img\RookW.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FinalyChessProject\FinalyChessProject.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Img\BishopB.png" />
+    <Resource Include="Img\BishopW.png" />
+    <Resource Include="Img\KingB.png" />
+    <Resource Include="Img\KingW.png" />
+    <Resource Include="Img\KnightB.png" />
+    <Resource Include="Img\KnightW.png" />
+    <Resource Include="Img\PawnB.png" />
+    <Resource Include="Img\PawnW.png" />
+    <Resource Include="Img\phprnyp9x.png" />
+    <Resource Include="Img\QueenB.png" />
+    <Resource Include="Img\QueenW.png" />
+    <Resource Include="Img\RookB.png" />
+    <Resource Include="Img\RookW.png" />
+  </ItemGroup>
+
+</Project>

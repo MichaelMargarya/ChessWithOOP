@@ -1,0 +1,40 @@
+﻿<Window x:Class="ChessWpfProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChessWpfProject"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="177*"/>
+            <RowDefinition Height="307*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="44,17,0,0" Width="450" Height="450" HorizontalAlignment="Left"  VerticalAlignment="Top" Grid.RowSpan="2" >
+            <Grid.Background>
+                <ImageBrush/>
+            </Grid.Background>
+            <Image Source="/Img/phprnyp9x.png" Stretch="Fill" Width="400" Height="400" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Grid Width="400" Height="400"/>
+
+        </Grid>
+        <ComboBox Name="Figures" Margin="0,93,107,0" VerticalAlignment="Top" Width="120" Height="20" HorizontalAlignment="Right">
+            <ComboBoxItem>Pawn</ComboBoxItem>
+            <ComboBoxItem>Knight</ComboBoxItem>
+            <ComboBoxItem>Rook</ComboBoxItem>
+            <ComboBoxItem>Queen</ComboBoxItem>
+            <ComboBoxItem>King</ComboBoxItem>
+        </ComboBox>
+        <ComboBox Name="Color"  Margin="0,163,107,0" VerticalAlignment="Top" Width="120" Height="20" Grid.RowSpan="2" HorizontalAlignment="Right">
+            <ComboBoxItem>Black</ComboBoxItem>
+            <ComboBoxItem>White</ComboBoxItem>
+        </ComboBox>
+        <Button Content="Add" Cursor="Hand" Margin="0,74,107,0" VerticalAlignment="Top" Click="Add" Height="20" HorizontalAlignment="Right" Width="120" Grid.Row="1"/>
+        <Button Content="Clear" Cursor="Hand" Margin="0,118,107,0" VerticalAlignment="Top" Height="20" Grid.Row="1" HorizontalAlignment="Right" Width="120"/>
+        <TextBox  Name="Cordinate" Margin="0,40,107,0" TextWrapping="Wrap" Text="Coord" VerticalAlignment="Top" Width="120" Height="20" Grid.Row="1" HorizontalAlignment="Right"/>
+
+
+    </Grid>
+</Window>

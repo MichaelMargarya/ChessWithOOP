@@ -1,13 +1,13 @@
 ﻿using System;
-
-namespace Classic.SecondGameMode
-{
+namespace FinalChessProject;
     using FinalChessProject.Figures;
-    
+using static System.Console;
     using FinalyChessProject.Figures;
     using FinalyChessProject;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Net.Http.Headers;
 
-    internal class Validation : Figs
+internal class Validation : Figs
     {
         public bool QueenAttacksKing(Coordinate queen, Coordinate king)
         {
@@ -54,7 +54,50 @@ namespace Classic.SecondGameMode
             {
                 return true;
             }
-            return false;
+        return false;
         }
-    }
+
+    //public Coordinate ValCoord(Coordinate whiteKingCoordinate, Coordinate blackQueen, Coordinate firstRook, Coordinate secondRook)
+    //{
+    //    Board map = new Board();
+
+    //    if (!IsStalemate(whiteKingCoordinate, blackQueen, firstRook, secondRook) && !IsCheck(whiteKingCoordinate, blackQueen, firstRook, secondRook))
+    //    {
+
+    //      //  return map.GetCoordinate(map.map);
+    //    }
+    //    else
+    //    {
+
+    //        Console.WriteLine("Enter new Coordinate:");
+    //        return ValCoord(whiteKingCoordinate, blackQueen, firstRook, secondRook);
+    //    }
+    //}
+    //public Coordinate GetCoordinate(string[,] map)
+    //{
+
+
+    //    for (int i = 0; i < 8; i++)
+    //    {
+    //        for (int j = 0; j < 8; j++)
+    //        {
+
+    //            Coordinate tempCoord = new Coordinate();
+    //            tempCoord.i = i;
+    //            tempCoord.j = j;
+    //         //   bool game = IsStalemate(tempCoord, blackQueen, firstRook, secondRook);// && !IsCheck(whiteKing, blackQueen, firstRook, secondRook)
+    //            if (game)
+    //            {
+    //                Coordinate list = new Coordinate();
+    //                list.Add(tempCoord);
+    //                return list;
+    //            }
+    //        }
+    //    }
+
+
+    //    return new Coordinate();
+    //}
+
 }
+

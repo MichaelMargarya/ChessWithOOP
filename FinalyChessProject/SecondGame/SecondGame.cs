@@ -1,9 +1,9 @@
-﻿using Classic.SecondGameMode;
-using FinalChessProject;
+﻿using FinalChessProject;
 using FinalChessProject.Figures;
 using FinalyChessProject;
 using FinalyChessProject.Figures;
 using static System.Console;
+namespace FinalChessProject;
 public class SecondMode : Figs
 {
     King whiteKing = new King('W');
@@ -26,14 +26,15 @@ public class SecondMode : Figs
         WriteLine("Enter Coordinate Black Queen");
         blackQueen.Coord = new Coordinate(ReadLine().ToLower());
         blackQueen.AddFigureToMap(board, blackQueen.Coord, blackQueen.FigureImg);
-        WriteLine("Enter Coordinate Fist Black Rook");
         map.NewPrintMap(board);
+        WriteLine("Enter Coordinate Fist Black Rook");
         firstRook.Coord = new Coordinate(ReadLine().ToLower());
         firstRook.AddFigureToMap(board, firstRook.Coord, firstRook.FigureImg);
         map.NewPrintMap(board);
         WriteLine("Enter Coordinate second black Rook");
         secondRook.Coord = new Coordinate(ReadLine().ToLower());
         secondRook.AddFigureToMap(board, secondRook.Coord, secondRook.FigureImg);
+        map.NewPrintMap(board);
         //WriteLine("Enter WHITE KING coordinate");
         //whiteKing.Coord = new Coordinate(ReadLine().ToLower());
         //if (valid.ValidCoord(whiteKing.Coord,blackQueen.Coord , firstRook.Coord,secondRook.Coord))
@@ -42,39 +43,42 @@ public class SecondMode : Figs
 
         //}
         bool isDone = true;
+        WriteLine("Enter white King Coordinate");
+        Coordinate whiteKingCoordinate = new Coordinate(ReadLine().ToLower());
         while (isDone)
         {
-            System.Console.WriteLine("Enter white King Coordinate");
-            
-            Coordinate whiteKingCoordinate = new Coordinate(ReadLine().ToLower());
 
-         
-            if (!valid.IsStalemate(whiteKingCoordinate, blackQueen.Coord, firstRook.Coord, secondRook.Coord))
+            if (valid.IsStalemate(whiteKingCoordinate, blackQueen.Coord, firstRook.Coord, secondRook.Coord))
             {
-                whiteKing.AddFigureToMap(board,whiteKingCoordinate,whiteKing.FigureImg);
-                continue;
-            }
+                WriteLine("Invalid input, enter new coordinate for White King!");
+                whiteKingCoordinate = new Coordinate(Console.ReadLine().ToLower());
 
-            
-            if (valid.IsCheck(whiteKingCoordinate, blackQueen.Coord, firstRook.Coord, secondRook.Coord))
+            }
+            else if(valid.IsCheck(whiteKingCoordinate, blackQueen.Coord, firstRook.Coord, secondRook.Coord))
             {
-                System.Console.WriteLine("Invalid input, king is in check!");
-                continue;
+                WriteLine("Invalid input, enter new coordinate for White King!");
+                whiteKingCoordinate = new Coordinate(Console.ReadLine().ToLower());
             }
+            else
+            {
+                whiteKing.AddFigureToMap(board, whiteKingCoordinate, whiteKing.FigureImg);
+                map.NewPrintMap(board);
+            }
+     
+           
 
-            System.Console.WriteLine("Enter Destination Coordinate!");
-            string destinationInput = System.Console.ReadLine().ToLower();
-            Coordinate destinationCoordinate = new Coordinate(destinationInput);
-
+            WriteLine("Enter Destination Coordinate!");
+            Coordinate destinationInput = new Coordinate(Console.ReadLine().ToLower());
+       
             
             //if (KingCanMove(whiteKingCoordinate, destinationCoordinate))
             //{
             //    whiteKing.AddFigureToMap(board, destinationCoordinate, '♔');
             //    map.NewPrintMap(board);
             //}
-            if(whiteKing.KingMove(whiteKing.Coord , destinationCoordinate))
+            if(whiteKing.KingMove(whiteKing.Coord , destinationInput))
             {
-                whiteKing.AddFigureToMap(board, destinationCoordinate, whiteKing.FigureImg);
+                whiteKing.AddFigureToMap(board, destinationInput, whiteKing.FigureImg);
                 map.NewPrintMap(board);
             }
             else
@@ -82,6 +86,8 @@ public class SecondMode : Figs
                 WriteLine("Invalid move!");
             }
         }
+   
+        
     }
 
  

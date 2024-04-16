@@ -1,5 +1,6 @@
 ﻿namespace FinalyChessProject;
 
+using FinalChessProject;
 using System.Threading.Channels;
 using static System.Console;
 public class StartGame

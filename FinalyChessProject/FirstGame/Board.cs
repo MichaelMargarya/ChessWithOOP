@@ -5,7 +5,7 @@ namespace FinalChessProject;
 
 public class Board
 {
-
+   public string[,] map = new string[8, 8]; 
     Letters let = new Letters();
 
     public void NewPrintMap(string[,] board)
@@ -25,7 +25,7 @@ public class Board
                 {
                     Console.BackgroundColor = ConsoleColor.Blue;
                 }
-                Console.Write(" " + board[i, j]);
+                Console.Write(board[i, j] + " ");
                 Console.BackgroundColor = ConsoleColor.Black;
                 if (j == 7)
                 {
@@ -74,5 +74,7 @@ public class Board
             throw new ArgumentOutOfRangeException();
         }
     }
+
+  
 }
 
