@@ -4,6 +4,7 @@ namespace FinalyChessProject.Figures;
 
 internal class Knight:Figs
 {
+    
     private char _color;
     public char Color
     {

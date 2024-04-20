@@ -1,13 +1,12 @@
-﻿using System;
-namespace FinalChessProject;
-    using FinalChessProject.Figures;
-using static System.Console;
-    using FinalyChessProject.Figures;
-    using FinalyChessProject;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Net.Http.Headers;
+﻿using FinalChessProject;
+using FinalChessProject.Figures;
+using FinalyChessProject;
+using System;
+using System.Collections.Generic;
 
-internal class Validation : Figs
+namespace FinalChessProject
+{
+    internal class Validation : Figs
     {
         public bool QueenAttacksKing(Coordinate queen, Coordinate king)
         {
@@ -24,80 +23,79 @@ internal class Validation : Figs
             return QueenAttacksKing(queen, kingPosition) || RookAttacksKing(fRook, kingPosition) || RookAttacksKing(sRook, kingPosition);
         }
 
-        public bool IsStalemate(Coordinate king, Coordinate queen, Coordinate fRook, Coordinate sRook)
+        public bool IsStalemate(Coordinate king, Coordinate queen, Coordinate fRook, Coordinate sRook, Coordinate blackKing)
         {
-            for (int i = -1; i <= 1; i++)
+            List<Coordinate> list = new List<Coordinate> { fRook, sRook, queen, blackKing, king };
+
+            int num = king.j;
+            int let = king.i;
+
+            for (int i = num - 1; i <= num + 1; i++)
             {
-                for (int j = -1; j <= 1; j++)
+                for (var j = let - 1; j <= let + 1; j++)
                 {
-                    if (i == 0 && j == 0)
-                        continue;
-
-                    Coordinate neighbor = new Coordinate { i = king.i + i, j = king.j + j };
-
-                    if (!IsCheck(neighbor, queen, fRook, sRook))
-                        return false;
+                    if (i != num || j != let)
+                    {
+                        king.i = i;
+                        king.j = j;
+                        if (!IsTheKingUnderAttack(list))
+                        {
+                            return false;
+                        }
+                    }
                 }
             }
 
-            Console.WriteLine("*******Stalemate*******");
             return true;
         }
 
-        public bool CheckMate(Coordinate king, Coordinate queen, Coordinate fRook, Coordinate sRook)
+
+        public bool CheckMate(Coordinate king, Coordinate queen, Coordinate fRook, Coordinate sRook,Coordinate blackk)
         {
-            return IsCheck(king, queen, fRook, sRook) && IsStalemate(king, queen, fRook, sRook);
+            return IsCheck(king, queen, fRook, sRook) && IsStalemate(king,queen,fRook,sRook,blackk);
         }
-        public bool ValidCoord(Coordinate wKing , Coordinate Queen , Coordinate fRook , Coordinate sRook )
+
+        public bool ValidCoord(Coordinate wKing, Coordinate Queen, Coordinate fRook, Coordinate sRook, Coordinate blackk)
         {
-            if(!IsStalemate(wKing,Queen,fRook,sRook) && IsCheck(wKing,Queen,fRook,sRook))
+            if (!IsStalemate(wKing, Queen, fRook, sRook, blackk) && IsCheck(wKing, Queen, fRook, sRook))
             {
                 return true;
             }
-        return false;
+            return false;
         }
 
-    //public Coordinate ValCoord(Coordinate whiteKingCoordinate, Coordinate blackQueen, Coordinate firstRook, Coordinate secondRook)
-    //{
-    //    Board map = new Board();
+        public bool EqualCoordinates(List<Coordinate> coordinates)
+        {
+            return coordinates.Count == coordinates.Distinct().Count();
+        }
 
-    //    if (!IsStalemate(whiteKingCoordinate, blackQueen, firstRook, secondRook) && !IsCheck(whiteKingCoordinate, blackQueen, firstRook, secondRook))
-    //    {
+        public bool IsTheKingUnderAttack(List<Coordinate> Cord)
+        {
+            //0 - Rook1, 1- Rook2 , 2- Queen , 3 - blackking , 4- whiteKing
+            if ((Math.Abs((int)Cord[4].i - (int)Cord[2].i)) == Math.Abs((Cord[4].j - Cord[2].j)) ||
+               Cord[4].j == Cord[2].j || Cord[4].i == Cord[2].i)
+            {
+                return false;
+            }
+            else if ((Cord[4].j == Cord[0].j || Cord[4].i == Cord[0].i))
+            {
+                return false;
+            }
+            else if ((Cord[4].j == Cord[1].j || Cord[4].i == Cord[1].i))
+            {
+                return false;
+            }
+            else if ((Math.Abs(Cord[4].j - Cord[3].j) == 1 &&
+                Math.Abs((int)Cord[4].i - (int)Cord[3].i) == 1))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
-    //      //  return map.GetCoordinate(map.map);
-    //    }
-    //    else
-    //    {
-
-    //        Console.WriteLine("Enter new Coordinate:");
-    //        return ValCoord(whiteKingCoordinate, blackQueen, firstRook, secondRook);
-    //    }
-    //}
-    //public Coordinate GetCoordinate(string[,] map)
-    //{
-
-
-    //    for (int i = 0; i < 8; i++)
-    //    {
-    //        for (int j = 0; j < 8; j++)
-    //        {
-
-    //            Coordinate tempCoord = new Coordinate();
-    //            tempCoord.i = i;
-    //            tempCoord.j = j;
-    //         //   bool game = IsStalemate(tempCoord, blackQueen, firstRook, secondRook);// && !IsCheck(whiteKing, blackQueen, firstRook, secondRook)
-    //            if (game)
-    //            {
-    //                Coordinate list = new Coordinate();
-    //                list.Add(tempCoord);
-    //                return list;
-    //            }
-    //        }
-    //    }
-
-
-    //    return new Coordinate();
-    //}
-
+    }
 }
 

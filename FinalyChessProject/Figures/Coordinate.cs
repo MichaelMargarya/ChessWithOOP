@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FinalChessProject.Figures
 {
-    public struct Coordinate : ICollection<Coordinate> // , IEnumerable<Coordinate>
+    public struct Coordinate 
     {
         public int i;
         public int j;
@@ -18,62 +18,17 @@ namespace FinalChessProject.Figures
         public Coordinate(string coord)
         {
             char colChar = coord[0];
-            int.TryParse(coord[1].ToString(), out j);
+            int.TryParse(coord[1].ToString(), out int row);
             i = colChar - 'a';
-            j = j - 1;
+            j = row - 1;
             Coordinates = new List<Coordinate>();
         }
 
-        public void Add(Coordinate item)
-        {
-            Coordinates.Add(item);
-        }
-
-        public void Clear()
-        {
-            Coordinates.Clear();
-        }
-
        
-
-       
-
-        public IEnumerator<Coordinate> GetEnumerator()
+        public Coordinate(int i ,int j)
         {
-            return Coordinates.GetEnumerator();
+            this.i = (char)i+ 97;
+            this.j = (char)j + 48;
         }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return Coordinates.GetEnumerator();
-        }
-
-        public bool Contains(Coordinate item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CopyTo(Coordinate[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(Coordinate item)
-        {
-            throw new NotImplementedException();
-        }
-
-        //  operators
-        public static bool operator ==(Coordinate a, Coordinate b)
-        {
-            return a.i == b.i && a.j == b.j;
-        }
-
-        public static bool operator !=(Coordinate a, Coordinate b)
-        {
-            return !(a == b);
-        }
-     
-
     }
 }

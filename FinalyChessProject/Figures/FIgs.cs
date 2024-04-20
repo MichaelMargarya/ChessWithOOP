@@ -1,4 +1,5 @@
-﻿using FinalChessProject.Figures;
+﻿using FinalChessProject;
+using FinalChessProject.Figures;
 
 namespace FinalyChessProject
 {
@@ -25,6 +26,7 @@ namespace FinalyChessProject
             string figure = Convert.ToString(figure1);
             Board[i, j] = figure;
         }
+       
 
     }
 }

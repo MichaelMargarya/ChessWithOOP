@@ -2,6 +2,9 @@
 using FinalChessProject.Figures;
 using FinalyChessProject;
 using FinalyChessProject.Figures;
+using FinalyChessProject.SecondGame;
+using System.ComponentModel.DataAnnotations;
+using System.Xml.XPath;
 using static System.Console;
 namespace FinalChessProject;
 public class SecondMode : Figs
@@ -12,6 +15,7 @@ public class SecondMode : Figs
     Rook firstRook = new Rook('B');
     Rook secondRook = new Rook('B');
     Validation valid = new Validation();
+    Board board = new Board();
 
     public void StartG(string[,] board)
     {
@@ -35,60 +39,35 @@ public class SecondMode : Figs
         secondRook.Coord = new Coordinate(ReadLine().ToLower());
         secondRook.AddFigureToMap(board, secondRook.Coord, secondRook.FigureImg);
         map.NewPrintMap(board);
-        //WriteLine("Enter WHITE KING coordinate");
-        //whiteKing.Coord = new Coordinate(ReadLine().ToLower());
-        //if (valid.ValidCoord(whiteKing.Coord,blackQueen.Coord , firstRook.Coord,secondRook.Coord))
+        bool Okay = true;
+        //while (Okay)
         //{
-        //    whiteKing.AddFigureToMap(board,whiteKing.Coord,whiteKing.FigureImg);
-
-        //}
-        bool isDone = true;
-        WriteLine("Enter white King Coordinate");
-        Coordinate whiteKingCoordinate = new Coordinate(ReadLine().ToLower());
-        while (isDone)
-        {
-
-            if (valid.IsStalemate(whiteKingCoordinate, blackQueen.Coord, firstRook.Coord, secondRook.Coord))
-            {
-                WriteLine("Invalid input, enter new coordinate for White King!");
-                whiteKingCoordinate = new Coordinate(Console.ReadLine().ToLower());
-
-            }
-            else if(valid.IsCheck(whiteKingCoordinate, blackQueen.Coord, firstRook.Coord, secondRook.Coord))
-            {
-                WriteLine("Invalid input, enter new coordinate for White King!");
-                whiteKingCoordinate = new Coordinate(Console.ReadLine().ToLower());
-            }
-            else
-            {
-                whiteKing.AddFigureToMap(board, whiteKingCoordinate, whiteKing.FigureImg);
-                map.NewPrintMap(board);
-            }
-     
-           
-
-            WriteLine("Enter Destination Coordinate!");
-            Coordinate destinationInput = new Coordinate(Console.ReadLine().ToLower());
-       
-            
-            //if (KingCanMove(whiteKingCoordinate, destinationCoordinate))
+              WriteLine("Enter white King Coordinate ");
+              whiteKing.Coord = new Coordinate(ReadLine().ToLower());
+            //if (valid.ValidCoord(whiteKing.Coord, blackQueen.Coord, firstRook.Coord, secondRook.Coord, blackKing.Coord))
             //{
-            //    whiteKing.AddFigureToMap(board, destinationCoordinate, '♔');
-            //    map.NewPrintMap(board);
-            //}
-            if(whiteKing.KingMove(whiteKing.Coord , destinationInput))
-            {
-                whiteKing.AddFigureToMap(board, destinationInput, whiteKing.FigureImg);
+                List<Coordinate> coord = [firstRook.Coord, secondRook.Coord, blackQueen.Coord, blackKing.Coord, whiteKing.Coord];
+                King wKing = new King('W');
+                Mate mate = new Mate();
+        whiteKing.AddFigureToMap(board, whiteKing.Coord, whiteKing.FigureImg);
                 map.NewPrintMap(board);
-            }
-            else
-            {
-                WriteLine("Invalid move!");
-            }
-        }
-   
-        
-    }
+                if (valid.EqualCoordinates(coord) && valid.IsTheKingUnderAttack(coord)
+                    && !valid.IsStalemate(coord[4], coord[2], coord[0], coord[1], coord[3]))
+                {
 
- 
+                    mate.Mat(coord, coord[0], coord[1], coord[2], coord[3], coord[4]);
+                }
+               // Okay = false;
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Invalid King Cordinate Input!");
+            //}
+
+       //W }
+
+
+       
+    }
 }
+
