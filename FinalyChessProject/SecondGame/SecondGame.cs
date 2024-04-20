@@ -51,12 +51,12 @@ public class SecondMode : Figs
                 Mate mate = new Mate();
         whiteKing.AddFigureToMap(board, whiteKing.Coord, whiteKing.FigureImg);
                 map.NewPrintMap(board);
-                if (valid.EqualCoordinates(coord) && valid.IsTheKingUnderAttack(coord)
-                    && !valid.IsStalemate(coord[4], coord[2], coord[0], coord[1], coord[3]))
-                {
+                //if (valid.EqualCoordinates(coord) && valid.IsTheKingUnderAttack(coord)
+                //    && !valid.IsStalemate(coord[4], coord[2], coord[0], coord[1], coord[3]))
+                //{
 
                     mate.Mat(coord, coord[0], coord[1], coord[2], coord[3], coord[4]);
-                }
+               // }
                // Okay = false;
             //}
             //else

@@ -48,7 +48,6 @@ public class Mate
 
             if (Math.Abs(coordR1.j - coordWK.j) != 1)
             {
-                // Если белый король не под атакой от чёрной королевы или чёрного короля
                 if (CheckR1(rook1Steps, ref coordR1, coordWK))
                 {
                     board.PrintFiguresLetterOnTheBoard(coordR1, coordR2, coordQ, coordBK, coordWK);
@@ -59,7 +58,7 @@ public class Mate
                 }
                 else
                 {
-                    coordR1.i += 1; // Перемещаем ладью
+                    coordR1.i += 1;
                     board.PrintFiguresLetterOnTheBoard(coordR1, coordR2, coordQ, coordBK, coordWK);
                 }
             }
@@ -71,7 +70,7 @@ public class Mate
                 }
                 else
                 {
-                    coordR2.i += 2; // Перемещаем вторую ладью
+                    coordR2.i += 2;
                     board.PrintFiguresLetterOnTheBoard(coordR1, coordR2, coordQ, coordBK, coordWK);
                 }
             }
@@ -79,17 +78,17 @@ public class Mate
             {
                 if (CheckQ(queenSteps, ref coordQ, coordWK))
                 {
-                    coordQ.j = coordWK.j; // Перемещаем ферзя
+                    coordQ.j = coordWK.j; 
                     board.PrintFiguresLetterOnTheBoard(coordR1, coordR2, coordQ, coordBK, coordWK);
                 }
                 else
                 {
-                    coordQ.i += 3; // Перемещаем ферзя
+                    coordQ.i += 3; 
                     board.PrintFiguresLetterOnTheBoard(coordR1, coordR2, coordQ, coordBK, coordWK);
                 }
             }
 
-            // Проверяем на мат
+        
             if (Math.Abs(coordR1.j - coordWK.j) == 1 && Math.Abs(coordR2.j - coordWK.j) == 1
                 && Math.Abs(coordQ.j - coordWK.j) == 0)
             {
@@ -100,7 +99,7 @@ public class Mate
             else
             {
                 mate = false;
-                coordWK = WhiteKingMove(coordWK); // Передвигаем белого короля
+                coordWK = WhiteKingMove(coordWK); 
             }
 
         } while (!mate);

@@ -1,13 +1,14 @@
 ﻿using FinalChessProject;
 using FinalChessProject.Figures;
 using FinalyChessProject.Figures;
+using System.Text;
 using static System.Console;
 
 namespace FinalyChessProject;
 
-public class FirstGame: Figs
+public class FirstGame : Figs
 {
-   Board board = new Board();
+    Board board = new Board();
     public void StartGame(string[,] map)
     {
         OutputEncoding = System.Text.Encoding.UTF8;
@@ -15,43 +16,56 @@ public class FirstGame: Figs
         ConsoleKeyInfo pressedKey = ReadKey();
         WriteLine();
         bool userInput = true;
-        while(userInput)
+        while (userInput)
         {
+            bool okay = true;
             board.PrintMap(map);
-            //WriteLine("Enter first Coordinate");
-            //Coordinate firstCoord = new Coordinate(ReadLine().ToLower());
-            //Write("Enter second Coordinate");
-            //Coordinate secondCoord = new Coordinate(ReadLine().ToLower());
+
             switch (pressedKey.Key)
             {
                 case ConsoleKey.K:
                     King king = new King('W');
                     WriteLine("Enter first Coordinate");
                     Coordinate firstCoord = new Coordinate(ReadLine().ToLower());
-                    king.AddFigureToMap(map, firstCoord,king.FigureImg);
+                    king.AddFigureToMap(map, firstCoord, king.FigureImg);
                     board.NewPrintMap(map);
-                    Write("Enter second Coordinate");
-                    Coordinate secondCoord = new Coordinate(ReadLine().ToLower());
-                    if(king.KingMove(firstCoord,secondCoord))
+                    while (true)
                     {
-                        king.AddFigureToMap(map,secondCoord,king.FigureImg);
-                        userInput = false;
-                        board.NewPrintMap(map);
+                        WriteLine("Enter second Coordinate");
+                        Coordinate secondCoord = new Coordinate(ReadLine().ToLower());
+                        if (king.KingMove(firstCoord, secondCoord))
+                        {
+                            map[firstCoord.i, firstCoord.j] = " ";
+                            king.AddFigureToMap(map, secondCoord, king.FigureImg);
+                            userInput = false;
+                            board.NewPrintMap(map);
+                            break;
+                        }
+                        else WriteLine("Invalid Input! ");
                     }
-                   break;
+                    break;
                 case ConsoleKey.B:
                     Bishop bishop = new Bishop('W');
+                   
+
                     WriteLine("Enter first Coordinate");
                     Coordinate firstCoorda = new Coordinate(ReadLine().ToLower());
                     bishop.AddFigureToMap(map, firstCoorda, bishop.FigureImg);
                     board.NewPrintMap(map);
-                    Write("Enter second Coordinate");
-                    Coordinate secondCoorda = new Coordinate(ReadLine().ToLower());
-                    if(bishop.BishopMove(firstCoorda,secondCoorda))
+                    while (okay)
                     {
-                      bishop.AddFigureToMap(map, secondCoorda, bishop.FigureImg);
-                        userInput = false;
-                        board.NewPrintMap(map);
+                        WriteLine("Enter second Coordinate");
+                        Coordinate secondCoorda = new Coordinate(ReadLine().ToLower());
+                        if (bishop.BishopMove(firstCoorda, secondCoorda))
+                        {
+                            map[firstCoorda.i, firstCoorda.j] = " ";
+                            bishop.AddFigureToMap(map, secondCoorda, bishop.FigureImg);
+                            userInput = false;
+                            board.NewPrintMap(map);
+                            break;
+                        }
+                        else WriteLine("Invalid input!");
+
                     }
                     break;
                 case ConsoleKey.Q:
@@ -60,45 +74,66 @@ public class FirstGame: Figs
                     Coordinate firstCoordq = new Coordinate(ReadLine().ToLower());
                     queen.AddFigureToMap(map, firstCoordq, queen.FigureImg);
                     board.NewPrintMap(map);
-                    Write("Enter second Coordinate");
-                    Coordinate secondCoordq = new Coordinate(ReadLine().ToLower());
-                    if(queen.QueenMove(firstCoordq,secondCoordq))
+                    while (okay)
                     {
-                        queen.AddFigureToMap(map, secondCoordq, queen.FigureImg);
-                        userInput = false;
-                        board.NewPrintMap(map);
+
+
+                        Write("Enter second Coordinate");
+                        Coordinate secondCoordq = new Coordinate(ReadLine().ToLower());
+                        if (queen.QueenMove(firstCoordq, secondCoordq))
+                        {
+                            map[firstCoordq.i, firstCoordq.j] = " ";
+                            queen.AddFigureToMap(map, secondCoordq, queen.FigureImg);
+                            userInput = false;
+                            board.NewPrintMap(map);
+                            break;
+                        }
+                        else WriteLine("Invalid Input!");
+                        
                     }
                     break;
-                    case ConsoleKey.R:
+                case ConsoleKey.R:
                     Rook rook = new Rook('W');
                     WriteLine("Enter first Coordinate");
                     Coordinate firstCoordr = new Coordinate(ReadLine().ToLower());
-                    rook.AddFigureToMap(map,firstCoordr,rook.FigureImg);
+                    rook.AddFigureToMap(map, firstCoordr, rook.FigureImg);
                     board.NewPrintMap(map);
-                    Write("Enter second Coordinate");
-                    Coordinate secondCoordr = new Coordinate(ReadLine().ToLower());
-                    if(rook.RookMove(firstCoordr,secondCoordr))
+                    while (okay)
                     {
-                        rook.AddFigureToMap(map,secondCoordr,rook.FigureImg);
-                        userInput = false;
-                        board.NewPrintMap(map);
+                        Write("Enter second Coordinate");
+                        Coordinate secondCoordr = new Coordinate(ReadLine().ToLower());
+                        if (rook.RookMove(firstCoordr, secondCoordr))
+                        {
+                            map[firstCoordr.i, firstCoordr.j] = " ";
+                            rook.AddFigureToMap(map, secondCoordr, rook.FigureImg);
+                            userInput = false;
+                            board.NewPrintMap(map);
+                            break;
+                       }                      
+                       else WriteLine("invalid input!");                       
                     }
                     break;
                 case ConsoleKey.H:
                     Knight knight = new Knight('W');
                     WriteLine("Enter first Coordinate");
                     Coordinate firstCoordh = new Coordinate(ReadLine().ToLower());
-                    knight.AddFigureToMap(map,firstCoordh,knight.FigureImg);
+                    knight.AddFigureToMap(map, firstCoordh, knight.FigureImg);
                     board.NewPrintMap(map);
-                    Write("Enter second Coordinate");
-                    Coordinate secondCoordh = new Coordinate(ReadLine().ToLower());
-                    if(knight.KnightMove(firstCoordh,secondCoordh))
+                    while (okay)
+                    {
+                        Write("Enter second Coordinate");
+                        Coordinate secondCoordh = new Coordinate(ReadLine().ToLower());
+                        if (knight.KnightMove(firstCoordh, secondCoordh))
                         {
-                        knight.AddFigureToMap(map, secondCoordh, knight.FigureImg);
-                        userInput = false;
-                        board.NewPrintMap(map);
+                            map[firstCoordh.i, firstCoordh.j] = " ";
+                            knight.AddFigureToMap(map, secondCoordh, knight.FigureImg);
+                            userInput = false;
+                            board.NewPrintMap(map);
+                            break;
                         }
-                    break;
+                        else WriteLine("Invalid Input!");
+                    }
+                        break;
             }
 
         }
